@@ -133,3 +133,42 @@ async def test_options_flow_changes_area_and_temperature(hass: HomeAssistant):
     await hass.async_block_till_done()
     assert entry.runtime_data.settings["temperature_entity"] == "sensor.flur_temp"
     assert entry.runtime_data.plant.config.interval_days == 12
+
+
+async def test_actions_by_area_and_entities(hass: HomeAssistant):
+    areas = ar.async_get(hass)
+    wohnzimmer = areas.async_create("Wohnzimmer")
+    kueche = areas.async_create("Küche")
+    a = await _add_plant(hass, name="Gummibaum", area=wohnzimmer.id)
+    b = await _add_plant(hass, name="Herzblatt", area=wohnzimmer.id)
+    c = await _add_plant(hass, name="Geldbaum", area=kueche.id)
+
+    # whole area: both Wohnzimmer plants, not the kitchen one
+    resp = await hass.services.async_call(
+        DOMAIN, "watered", {"area_id": wohnzimmer.id}, blocking=True, return_response=True
+    )
+    assert resp == {"applied": ["Gummibaum", "Herzblatt"]}
+    level = lambda e: float(hass.states.get(_eid(hass, e, "sensor", "water_level")).state)
+    assert level(a) == 100 and level(b) == 100 and level(c) == 0
+
+    # by entity, mixed: snooze applies only where the level is low
+    resp = await hass.services.async_call(
+        DOMAIN,
+        "snooze",
+        {"entity_id": [_eid(hass, a, "sensor", "water_level"), _eid(hass, c, "sensor", "water_level")]},
+        blocking=True,
+        return_response=True,
+    )
+    assert resp == {"applied": ["Geldbaum"]}
+    assert level(a) == 100 and level(c) == pytest.approx(20)  # 2 of 10 days
+
+    # undo the whole kitchen
+    await hass.services.async_call(DOMAIN, "undo", {"area_id": kueche.id}, blocking=True)
+    assert level(c) == 0
+
+
+async def test_action_without_plants_is_refused(hass: HomeAssistant):
+    await _add_plant(hass)
+    empty = ar.async_get(hass).async_create("Garage")
+    with pytest.raises(ServiceValidationError):
+        await hass.services.async_call(DOMAIN, "watered", {"area_id": empty.id}, blocking=True)

@@ -117,6 +117,31 @@
     },
     "snooze_not_applied": {
       "message": "Nicht nötig: der Wasserstand reicht noch länger als 2 Tage."
+    },
+    "no_plants": {
+      "message": "Keine Pflanze in der Auswahl."
+    }
+  },
+  "services": {
+    "watered": {
+      "name": "Gegossen",
+      "description": "Füllt den Wasserstand der gewählten Pflanzen auf 100 %."
+    },
+    "snooze": {
+      "name": "Noch feucht",
+      "description": "Gewählte Pflanzen in 2 Tagen wieder fällig; Pflanzen mit mehr Wasser bleiben unverändert."
+    },
+    "bone_dry": {
+      "name": "Knochentrocken",
+      "description": "Gegossen, die Erde war knochentrocken (Intervall zu lang)."
+    },
+    "undo": {
+      "name": "Rückgängig",
+      "description": "Macht die letzte Aktion der gewählten Pflanzen rückgängig (bis 24 Stunden)."
+    },
+    "fertilized": {
+      "name": "Gedüngt",
+      "description": "Markiert die gewählten Pflanzen als gedüngt (nur Pflanzen mit Düngen)."
     }
   }
 }

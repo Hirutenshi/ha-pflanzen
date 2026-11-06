@@ -1,0 +1,30 @@
+watered:
+  target:
+    device:
+      integration: pflanzen
+    entity:
+      integration: pflanzen
+snooze:
+  target:
+    device:
+      integration: pflanzen
+    entity:
+      integration: pflanzen
+bone_dry:
+  target:
+    device:
+      integration: pflanzen
+    entity:
+      integration: pflanzen
+undo:
+  target:
+    device:
+      integration: pflanzen
+    entity:
+      integration: pflanzen
+fertilized:
+  target:
+    device:
+      integration: pflanzen
+    entity:
+      integration: pflanzen

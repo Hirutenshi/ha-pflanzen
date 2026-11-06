@@ -117,6 +117,31 @@
     },
     "snooze_not_applied": {
       "message": "Not needed: the water level lasts longer than 2 days."
+    },
+    "no_plants": {
+      "message": "No plant in the selection."
+    }
+  },
+  "services": {
+    "watered": {
+      "name": "Watered",
+      "description": "Refills the water level of the selected plants to 100 %."
+    },
+    "snooze": {
+      "name": "Still moist",
+      "description": "Selected plants are due again in 2 days; plants with more water stay unchanged."
+    },
+    "bone_dry": {
+      "name": "Bone dry",
+      "description": "Watered, the soil was bone dry (interval too long)."
+    },
+    "undo": {
+      "name": "Undo",
+      "description": "Undoes the last action of the selected plants (up to 24 hours)."
+    },
+    "fertilized": {
+      "name": "Fertilized",
+      "description": "Marks the selected plants as fertilized (only plants with fertilizing on)."
     }
   }
 }
