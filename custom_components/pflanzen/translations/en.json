@@ -1,0 +1,122 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add plant",
+        "data": {
+          "name": "Name",
+          "interval_days": "Watering interval",
+          "winter_factor": "Winter factor",
+          "area": "Area",
+          "temperature_entity": "Temperature from",
+          "fertilize": "Fertilize",
+          "fertilize_weeks": "Fertilizing interval",
+          "season_start": "Fertilizing season from",
+          "season_end": "Fertilizing season to"
+        },
+        "data_description": {
+          "interval_days": "Days from 100 % to empty, in summer.",
+          "winter_factor": "How much longer the interval is from November to February (1.0 = same, 2.0 = twice as long). Blended in October and March.",
+          "temperature_entity": "Thermostat or temperature sensor in the room. Only recorded (for learning later)."
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "A plant with this name already exists."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Edit plant",
+        "data": {
+          "interval_days": "Watering interval",
+          "winter_factor": "Winter factor",
+          "area": "Area",
+          "temperature_entity": "Temperature from",
+          "fertilize": "Fertilize",
+          "fertilize_weeks": "Fertilizing interval",
+          "season_start": "Fertilizing season from",
+          "season_end": "Fertilizing season to"
+        },
+        "data_description": {
+          "interval_days": "Days from 100 % to empty, in summer.",
+          "winter_factor": "How much longer the interval is from November to February (1.0 = same, 2.0 = twice as long). Blended in October and March.",
+          "temperature_entity": "Thermostat or temperature sensor in the room. Only recorded (for learning later)."
+        }
+      }
+    }
+  },
+  "selector": {
+    "month": {
+      "options": {
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "water_level": {
+        "name": "Water level"
+      },
+      "next_watering": {
+        "name": "Next watering"
+      },
+      "next_fertilizing": {
+        "name": "Next fertilizing"
+      }
+    },
+    "binary_sensor": {
+      "needs_water": {
+        "name": "Needs water"
+      },
+      "needs_fertilizer": {
+        "name": "Needs fertilizer"
+      }
+    },
+    "button": {
+      "watered": {
+        "name": "Watered"
+      },
+      "snooze": {
+        "name": "Still moist"
+      },
+      "bone_dry": {
+        "name": "Bone dry"
+      },
+      "undo": {
+        "name": "Undo"
+      },
+      "fertilized": {
+        "name": "Fertilized"
+      }
+    },
+    "number": {
+      "interval_days": {
+        "name": "Watering interval"
+      },
+      "winter_factor": {
+        "name": "Winter factor"
+      }
+    }
+  },
+  "exceptions": {
+    "undo_not_applied": {
+      "message": "Nothing to undo (only up to 24 hours back)."
+    },
+    "snooze_not_applied": {
+      "message": "Not needed: the water level lasts longer than 2 days."
+    }
+  }
+}

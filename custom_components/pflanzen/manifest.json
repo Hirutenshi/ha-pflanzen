@@ -1,0 +1,15 @@
+{
+  "domain": "pflanzen",
+  "name": "Pflanzen",
+  "codeowners": [
+    "@Hirutenshi"
+  ],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/Hirutenshi/ha-pflanzen",
+  "integration_type": "device",
+  "iot_class": "calculated",
+  "issue_tracker": "https://github.com/Hirutenshi/ha-pflanzen/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}

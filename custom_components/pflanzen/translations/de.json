@@ -1,0 +1,122 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Pflanze hinzufügen",
+        "data": {
+          "name": "Name",
+          "interval_days": "Gießintervall",
+          "winter_factor": "Winterfaktor",
+          "area": "Bereich",
+          "temperature_entity": "Temperatur von",
+          "fertilize": "Düngen",
+          "fertilize_weeks": "Düngeintervall",
+          "season_start": "Düngesaison ab",
+          "season_end": "Düngesaison bis"
+        },
+        "data_description": {
+          "interval_days": "Tage von 100 % bis leer, im Sommer.",
+          "winter_factor": "Wie viel länger das Intervall von November bis Februar ist (1,0 = gleich, 2,0 = doppelt so lang). Im Oktober und März gleitend.",
+          "temperature_entity": "Thermostat oder Temperatursensor im Raum. Wird nur aufgezeichnet (für das spätere Lernen)."
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "Eine Pflanze mit diesem Namen gibt es schon."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Pflanze bearbeiten",
+        "data": {
+          "interval_days": "Gießintervall",
+          "winter_factor": "Winterfaktor",
+          "area": "Bereich",
+          "temperature_entity": "Temperatur von",
+          "fertilize": "Düngen",
+          "fertilize_weeks": "Düngeintervall",
+          "season_start": "Düngesaison ab",
+          "season_end": "Düngesaison bis"
+        },
+        "data_description": {
+          "interval_days": "Tage von 100 % bis leer, im Sommer.",
+          "winter_factor": "Wie viel länger das Intervall von November bis Februar ist (1,0 = gleich, 2,0 = doppelt so lang). Im Oktober und März gleitend.",
+          "temperature_entity": "Thermostat oder Temperatursensor im Raum. Wird nur aufgezeichnet (für das spätere Lernen)."
+        }
+      }
+    }
+  },
+  "selector": {
+    "month": {
+      "options": {
+        "1": "Januar",
+        "2": "Februar",
+        "3": "März",
+        "4": "April",
+        "5": "Mai",
+        "6": "Juni",
+        "7": "Juli",
+        "8": "August",
+        "9": "September",
+        "10": "Oktober",
+        "11": "November",
+        "12": "Dezember"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "water_level": {
+        "name": "Wasserstand"
+      },
+      "next_watering": {
+        "name": "Nächstes Gießen"
+      },
+      "next_fertilizing": {
+        "name": "Nächstes Düngen"
+      }
+    },
+    "binary_sensor": {
+      "needs_water": {
+        "name": "Braucht Wasser"
+      },
+      "needs_fertilizer": {
+        "name": "Düngen fällig"
+      }
+    },
+    "button": {
+      "watered": {
+        "name": "Gegossen"
+      },
+      "snooze": {
+        "name": "Noch feucht"
+      },
+      "bone_dry": {
+        "name": "Knochentrocken"
+      },
+      "undo": {
+        "name": "Rückgängig"
+      },
+      "fertilized": {
+        "name": "Gedüngt"
+      }
+    },
+    "number": {
+      "interval_days": {
+        "name": "Gießintervall"
+      },
+      "winter_factor": {
+        "name": "Winterfaktor"
+      }
+    }
+  },
+  "exceptions": {
+    "undo_not_applied": {
+      "message": "Nichts rückgängig zu machen (nur bis 24 Stunden zurück)."
+    },
+    "snooze_not_applied": {
+      "message": "Nicht nötig: der Wasserstand reicht noch länger als 2 Tage."
+    }
+  }
+}
