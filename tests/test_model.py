@@ -75,7 +75,9 @@ def test_snooze_sets_two_days_and_never_lowers():
     p.tick(t)
     assert p.needs_water()
     assert p.snooze(t) is True
-    assert p.days_left(t) == pytest.approx(2)
+    # 10-day interval: 15 % + 1 day (25 %) beats 2 days (20 %)
+    assert p.state.level == pytest.approx(25)
+    assert p.days_left(t) == pytest.approx(2.5)
     assert p.state.empty_since is None
     assert p.state.events[-1]["type"] == m.SNOOZED
 
@@ -139,3 +141,17 @@ def test_state_roundtrip():
     p.fertilized(SUMMER + timedelta(days=1))
     restored = m.PlantState.from_dict(p.state.to_dict())
     assert restored == p.state
+
+
+@pytest.mark.parametrize("interval", [3, 7, 10, 14, 20, 40])
+def test_snooze_leaves_due_soon_for_a_day(interval):
+    """Regression: with long (winter) intervals snooze left the plant on the list."""
+    p = watered_plant(SUMMER, interval=interval)
+    t = SUMMER + timedelta(days=interval * 0.9)  # 10 %: due soon
+    p.tick(t)
+    assert p.due_soon()
+    assert p.snooze(t) is True
+    assert not p.due_soon()
+    p.tick(t + timedelta(hours=23))
+    assert not p.due_soon()
+    assert p.days_left(t + timedelta(hours=23)) >= 1 - 1e-9

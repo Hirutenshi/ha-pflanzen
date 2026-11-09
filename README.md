@@ -9,7 +9,7 @@ Home Assistant custom integration for houseplant care: every plant gets a water 
 | Wasserstand (%) | 100 % after watering, drops linearly to 0 % over the effective interval |
 | Nächstes Gießen | when the level reaches 0 % |
 | Braucht Wasser | on at 0 % |
-| Gegossen / Noch feucht / Knochentrocken / Rückgängig | the four actions; snooze = due again in 2 days; undo works up to 24 h back |
+| Gegossen / Noch feucht / Knochentrocken / Rückgängig | the four actions; snooze = off the "due soon" list for at least a day and empty no sooner than 2 days; undo works up to 24 h back |
 | Gießintervall, Winterfaktor | editable on the device page |
 | Nächstes Düngen, Düngen fällig, Gedüngt | only if fertilizing is on; pauses outside the season |
 

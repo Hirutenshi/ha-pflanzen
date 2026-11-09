@@ -16,7 +16,8 @@ from typing import Any
 
 FULL = 100.0
 DUE_SOON_LEVEL = 15.0
-SNOOZE_DAYS = 2.0
+SNOOZE_DAYS = 2.0  # snoozed plant runs empty no sooner than this
+SNOOZE_HIDE_DAYS = 1.0  # ... and stays off the "due soon" list at least this long
 UNDO_WINDOW = timedelta(hours=24)
 CONVENIENCE_LEVEL = 30.0  # watered above this = not a signal for learning
 MAX_EVENTS = 5000
@@ -185,9 +186,16 @@ class Plant:
         st.temp_sum, st.temp_count = 0.0, 0
 
     def snooze(self, now: datetime, day_length: float | None = None) -> bool:
-        """Checked, still moist: due again in exactly SNOOZE_DAYS. Never lowers the level."""
+        """Checked, still moist: out of "due soon" for at least SNOOZE_HIDE_DAYS and
+        empty no sooner than SNOOZE_DAYS. Never lowers the level.
+
+        Both are needed because due soon is a fixed level: with a long (winter)
+        interval, two days of water is below DUE_SOON_LEVEL and the plant would
+        never leave the list; with a short one it would be back within hours.
+        """
         self.tick(now)
-        target = SNOOZE_DAYS * self.drain_per_day(now)
+        drain = self.drain_per_day(now)
+        target = max(SNOOZE_DAYS * drain, DUE_SOON_LEVEL + SNOOZE_HIDE_DAYS * drain)
         if self.state.level >= target:
             return False
         self._snapshot(now)
